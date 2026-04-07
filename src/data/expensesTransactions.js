@@ -1,0 +1,60 @@
+const expTransactionsFake = [
+  {
+    id: "1",
+    type: "expense",
+    amount: 1200,
+    category: "House",
+    date: "2026-04-05",
+    description: "April rent",
+  },
+  {
+    id: "2",
+    type: "expense",
+    amount: 150,
+    category: "Subscriptions",
+    date: "2026-04-02",
+    description: "Netflix",
+  },
+  {
+    id: "3",
+    type: "expense",
+    amount: 300,
+    category: "Food",
+    date: "2026-04-04",
+    description: "Groceries",
+  },
+  {
+    id: "4",
+    type: "expense",
+    amount: 50,
+    category: "Subscriptions",
+    date: "2026-04-03",
+    description: "Spotify",
+  },
+  {
+    id: "5",
+    type: "expense",
+    amount: 100,
+    category: "Transport",
+    date: "2026-04-05",
+    description: "Bus pass",
+  },
+  {
+    id: "6",
+    type: "expense",
+    amount: 200,
+    category: "Food",
+    date: "2026-04-06",
+    description: "Dining out",
+  },
+  {
+    id: "7",
+    type: "expense",
+    amount: 300,
+    category: "House",
+    date: "2026-04-07",
+    description: "Electricity bill",
+  },
+];
+
+export default expTransactionsFake;

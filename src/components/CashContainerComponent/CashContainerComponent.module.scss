@@ -1,0 +1,44 @@
+.cashContainer {
+  width: 384px;
+  height: 120px;
+  border: 1px solid #eceff2;
+  border-radius: 12px;
+  background-color: hsl(0, 0%, 100%);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ctn {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.title {
+  color: #516778;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.amount {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+}
+
+.percentageDifference {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid #eceff2;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}

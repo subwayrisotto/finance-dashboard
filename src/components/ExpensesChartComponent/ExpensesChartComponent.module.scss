@@ -1,0 +1,14 @@
+.chartCtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.header {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #333e47;
+}

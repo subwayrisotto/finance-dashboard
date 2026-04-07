@@ -1,0 +1,112 @@
+.topContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 48px 0;
+}
+
+.greetingMsg {
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 600;
+}
+
+.leftContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.dataByList {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #eceff2;
+  padding: 0;
+  border-radius: 8px;
+}
+
+.dataByListItem {
+  padding: 10px 16px;
+  border-right: 1px solid #eceff2;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  color: #516778;
+  font-weight: 600;
+  transition: 0.25s ease;
+  background-color: #fff;
+
+  &:last-child {
+    border-right: none;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+
+  &:first-child {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+  }
+
+  &.active {
+    background-color: #daebff;
+    color: #155eef;
+  }
+
+  &:hover {
+    background-color: #daebff;
+    color: #155eef;
+  }
+}
+
+.selectByPeriod {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #eceff2;
+  padding: 10px 16px;
+  color: #516778;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.25s ease;
+  background-color: #fff;
+
+  &:hover {
+    background-color: #daebff;
+    color: #155eef;
+  }
+}
+
+.containers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.cashOperationsCtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.expensesChartCtn {
+  max-width: 384px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #eceff2;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}

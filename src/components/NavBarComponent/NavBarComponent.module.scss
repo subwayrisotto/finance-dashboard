@@ -1,0 +1,89 @@
+.navbar {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  border-bottom: 1px solid #eceff2;
+  background-color: #fff;
+}
+
+.wrapper {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.navLogo {
+  aspect-ratio: 120/32;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.navList {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.navListItem {
+  a {
+    text-decoration: none;
+    color: #516778;
+  }
+
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 0.25s ease;
+  cursor: pointer;
+
+  &.navActive {
+    a {
+      color: #155eef;
+    }
+
+    background-color: #f5f8ff;
+  }
+
+  &:hover {
+    a {
+      color: #155eef;
+    }
+
+    background-color: #f5f8ff;
+  }
+}
+
+.accountDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.settings img,
+.notifications img {
+  aspect-ratio: 1/1;
+  width: 24px;
+  cursor: pointer;
+}
+
+.settings img {
+  transition: 1s ease;
+
+  &:hover {
+    rotate: 90deg;
+    scale: 1.05;
+  }
+}

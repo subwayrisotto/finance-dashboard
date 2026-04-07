@@ -1,0 +1,72 @@
+.form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputCtn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 16px;
+    line-height: 18px;
+    color: #000;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid #eceff2;
+    border-radius: 12px;
+    background-color: hsl(0, 0%, 100%);
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  select {
+    width: 100%;
+    border: 1px solid #eceff2;
+    border-radius: 12px;
+    background-color: hsl(0, 0%, 100%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 20px 50px 20px 20px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.submitFormBtn {
+  outline: none;
+  border: none;
+  background-color: #155eef;
+  border: 2px solid #155eef;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: 0.25s ease;
+
+  &:hover {
+    background-color: #fff;
+    color: #155eef;
+  }
+}
