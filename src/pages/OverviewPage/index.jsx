@@ -6,17 +6,30 @@ import CashContainer from "../../components/CashContainerComponent/CashContainer
 import CashOperationContainer from "../../components/CashOperationContainerComponent/CashOperationContainerComponent";
 import Modal from "../../components/ModalComponent/ModalComponent";
 import ExpensesChart from "../../components/ExpensesChartComponent/ExpensesChartComponent";
-import expTransactionsFake from "../../data/expensesTransactions";
+import fakeTransactions from "../../data/transactions";
+import TransactionsTable from "../../components/TransactionsTableComponent/TransactionsTableComponent";
 
 function Overview() {
   const [activeId, setActiveId] = useState(
     dataBy.find((item) => item.isActive)?.id || 1,
   );
-
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState(fakeTransactions);
   const [selectedBox, setSelectedBox] = useState(null);
-  const [expensesTransactions, setExpensesTransactions] =
-    useState(expTransactionsFake);
+
+  const incomeTransactions = transactions.filter((t) => t.type === "income");
+  const expensesTransactions = transactions.filter((t) => t.type === "expense");
+
+  const totalIncome = incomeTransactions.reduce((sum, t) => sum + t.amount, 0);
+  const totalExpenses = expensesTransactions.reduce(
+    (sum, t) => sum + t.amount,
+    0,
+  );
+
+  const balance = totalIncome - totalExpenses;
+
+  const sortedTransactions = [...transactions]
+    .filter((transaction) => transaction.type !== "transfer")
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const handleOpenModal = (type) => {
     setSelectedBox(type);
@@ -64,11 +77,15 @@ function Overview() {
           <CashContainer
             title="Balance"
             color="#155eef"
-            amount={5502.45}
+            amount={balance}
             prevAmount={4000}
           />
-          <CashContainer title="Incomes" amount={9450} prevAmount={7000} />
-          <CashContainer title="Expenses" amount={3945.55} />
+          <CashContainer
+            title="Incomes"
+            amount={totalIncome}
+            prevAmount={7000}
+          />
+          <CashContainer title="Expenses" amount={totalExpenses} />
         </div>
 
         <div className={styles.cashOperationsCtn}>
@@ -103,8 +120,14 @@ function Overview() {
           />
         )}
 
-        <div className={styles.expensesChartCtn}>
-          <ExpensesChart transactions={expensesTransactions} />
+        <div className={styles.detailedTransactionInfo}>
+          {" "}
+          <div className={styles.expensesChartCtn}>
+            <ExpensesChart transactions={expensesTransactions} />
+          </div>
+          <div className={styles.transactionTable}>
+            <TransactionsTable transactions={sortedTransactions} />
+          </div>
         </div>
       </div>
     </div>

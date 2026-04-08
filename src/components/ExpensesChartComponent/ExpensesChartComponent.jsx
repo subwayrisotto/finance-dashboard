@@ -74,7 +74,7 @@ function ExpensesChart({ transactions }) {
 
           return (
             <li className={styles.categoriesListItem} key={index}>
-              <div>
+              <div className={styles.leftCtn}>
                 <div
                   className={styles.categoryIcon}
                   style={{ backgroundColor: categoryColors[category.category] }}
@@ -84,9 +84,15 @@ function ExpensesChart({ transactions }) {
                     alt={category.category}
                   />
                 </div>
-                <p>{category.category}</p>
+                <p className={styles.categoryName}>{category.category}</p>
               </div>
-              <span>{percent}%</span>
+              <span className={styles.percantageValue}>
+                {percent.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+                %
+              </span>
             </li>
           );
         })}

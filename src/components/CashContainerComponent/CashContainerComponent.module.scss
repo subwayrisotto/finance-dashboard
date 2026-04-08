@@ -17,6 +17,18 @@
   align-items: flex-end;
 }
 
+.topCtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+  }
+}
+
 .title {
   color: #516778;
   font-size: 14px;

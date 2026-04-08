@@ -12,3 +12,49 @@
   font-weight: 600;
   color: #333e47;
 }
+
+.categoriesList {
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.categoriesListItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eceff2;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.leftCtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.categoryIcon {
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.categoryName {
+  color: #101828;
+}
+
+.percantageValue {
+  color: #668091;
+}

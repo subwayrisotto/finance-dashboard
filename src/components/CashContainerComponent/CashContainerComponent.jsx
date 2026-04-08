@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CashContainerComponent.module.scss";
 
 function CashContainer(props) {
   const { title, amount, color = "#000", prevAmount = 0 } = props;
+  const [isHide, setIsHide] = useState(false);
 
   function calcPercentageDifference(prev, current) {
     if (prev === 0) return 0;
@@ -12,16 +13,31 @@ function CashContainer(props) {
   const percDiff = calcPercentageDifference(prevAmount, amount);
   const isPositive = percDiff >= 0;
 
+  const handleHide = () => {
+    setIsHide((prev) => !prev);
+  };
+
   return (
     <div className={styles.cashContainer}>
-      <p className={styles.title}>{title}</p>
+      <div className={styles.topCtn}>
+        <p className={styles.title}>{title}</p>
+        <div className={styles.hideCtn} onClick={handleHide}>
+          {isHide ? (
+            <img src="/assets/icons/hide.svg" alt="Hide" />
+          ) : (
+            <img src="/assets/icons/show.svg" alt="Show" />
+          )}
+        </div>
+      </div>
       <div className={styles.ctn}>
         <p className={styles.amount} style={{ color: color }}>
           $
-          {amount.toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}
+          {isHide
+            ? amount.toString().replace(/\d/g, "*")
+            : `${amount.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`}
         </p>
 
         {percDiff !== 0 && (

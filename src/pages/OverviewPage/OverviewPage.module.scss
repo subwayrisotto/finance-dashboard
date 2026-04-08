@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 48px 0;
+  margin-bottom: 48px;
 }
 
 .greetingMsg {
@@ -89,6 +89,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 48px;
+  gap: 32px;
 }
 
 .cashOperationsCtn {
@@ -96,6 +97,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 48px;
+  gap: 32px;
+}
+
+.detailedTransactionInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 64px;
+}
+
+.transactionTable {
+  width: 100%;
 }
 
 .expensesChartCtn {
@@ -104,6 +117,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 32px;
   border: 1px solid #eceff2;
   border-radius: 12px;
   padding: 20px;

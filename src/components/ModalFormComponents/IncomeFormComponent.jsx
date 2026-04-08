@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import incomeSources from "../../data/incomeSources";
 import styles from "./Form.module.scss";
+import accounts from "../../data/accounts";
 
 function IncomeForm(props) {
   const { selectedBox, onAddTransaction, onClose } = props;
   const [formData, setFormData] = useState({
     amount: 0,
     source: "",
+    account: "",
     date: new Date().toISOString().split("T")[0],
     description: "",
   });
@@ -19,6 +21,7 @@ function IncomeForm(props) {
       type: selectedBox,
       amount: formData.amount,
       source: formData.source,
+      account: formData.account,
       date: formData.date,
       description: formData.description,
     };
@@ -39,7 +42,7 @@ function IncomeForm(props) {
           placeholder="Write amount..."
           value={formData.amount}
           onChange={(e) =>
-            setFormData((prev) => ({ ...prev, amount: e.target.value }))
+            setFormData((prev) => ({ ...prev, amount: Number(e.target.value) }))
           }
         />
       </div>
@@ -58,6 +61,26 @@ function IncomeForm(props) {
             return (
               <option value={is.value} key={is.id}>
                 {is.text}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      <div className={styles.inputCtn}>
+        <label htmlFor="account">Account:</label>
+        <select
+          id="account"
+          value={formData.account}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, account: e.target.value }))
+          }
+        >
+          <option value="">Select account</option>
+          {accounts.map((is) => {
+            return (
+              <option value={is.value} key={is.id}>
+                {is.name}
               </option>
             );
           })}
