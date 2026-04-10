@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./TransactionsTableComponent.module.scss";
+import AvatarTransaction from "../AvatarTransactionComponent/AvatarTransactionComponent";
+import icons from "../../data/icons";
 
 function TransactionsTable(props) {
   const { transactions } = props;
@@ -29,10 +31,16 @@ function TransactionsTable(props) {
               ? `+$${transaction.amount}`
               : `-$${transaction.amount}`;
 
+            const displayTitle =
+              transaction.type === "income"
+                ? transaction.source
+                : transaction.title;
+
             return (
               <tr className={styles.transactionsTr}>
                 <td className={styles.transactionsTd}>
-                  <p className={styles.title}>{transaction.title}</p>
+                  <AvatarTransaction title={displayTitle} icons={icons} />
+                  <p className={styles.title}>{displayTitle}</p>
                 </td>
                 <td className={styles.transactionsTd}>
                   <p className={styles.account}>

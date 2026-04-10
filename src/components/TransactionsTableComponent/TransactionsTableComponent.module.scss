@@ -43,8 +43,16 @@
   color: #516778;
 }
 
-.transactionsTbody tr:last-child td {
-  border-bottom: none;
+.transactionsTbody tr {
+  transition: 0.25s ease;
+  cursor: pointer;
+  &:last-child td {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: #eceff2;
+  }
 }
 
 .transactionsTd {
@@ -52,6 +60,14 @@
   border-bottom: 1px solid #eceff2;
   font-size: 16px;
   line-height: 22px;
+
+  &:first-child {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+  }
 }
 
 .title {

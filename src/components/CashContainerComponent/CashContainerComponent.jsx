@@ -31,10 +31,14 @@ function CashContainer(props) {
       </div>
       <div className={styles.ctn}>
         <p className={styles.amount} style={{ color: color }}>
-          $
           {isHide
-            ? amount.toString().replace(/\d/g, "*")
-            : `${amount.toLocaleString("en-US", {
+            ? `$${amount
+                .toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })
+                .replace(/\d/g, "*")}`
+            : `$${amount.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}

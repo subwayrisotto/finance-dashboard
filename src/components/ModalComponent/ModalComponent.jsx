@@ -18,7 +18,13 @@ function Modal(props) {
           />
         );
       case "expense":
-        return <ExpenseForm selectedBox={selectedBox} />;
+        return (
+          <ExpenseForm
+            selectedBox={selectedBox}
+            onAddTransaction={onAddTransaction}
+            onClose={onClose}
+          />
+        );
       case "transfer":
         return <TransferForm selectedBox={selectedBox} />;
       default:

@@ -24,7 +24,6 @@ function Overview() {
     (sum, t) => sum + t.amount,
     0,
   );
-
   const balance = totalIncome - totalExpenses;
 
   const sortedTransactions = [...transactions]

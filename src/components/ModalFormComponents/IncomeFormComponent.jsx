@@ -24,6 +24,7 @@ function IncomeForm(props) {
       account: formData.account,
       date: formData.date,
       description: formData.description,
+      createdAt: new Date().toISOString(),
     };
 
     if (!formData.amount || !formData.source) return;
