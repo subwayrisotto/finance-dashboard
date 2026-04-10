@@ -38,7 +38,7 @@ function IncomeForm(props) {
       <div className={styles.inputCtn}>
         <label htmlFor="amount">Amount:</label>
         <input
-          type="number"
+          type="text"
           id="amount"
           placeholder="Write amount..."
           value={formData.amount}

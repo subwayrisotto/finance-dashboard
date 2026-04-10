@@ -4,8 +4,7 @@ import AvatarTransaction from "../AvatarTransactionComponent/AvatarTransactionCo
 import icons from "../../data/icons";
 
 function TransactionsTable(props) {
-  const { transactions } = props;
-  console.log(transactions);
+  const { transactions, onDeleteTransaction, isShortTable = true } = props;
   return (
     <div className={styles.transactionsTableCtn}>
       <div className={styles.headerCtn}>
@@ -20,6 +19,9 @@ function TransactionsTable(props) {
             <th className={styles.transactionsTh}>Method</th>
             <th className={styles.transactionsTh}>Date</th>
             <th className={styles.transactionsTh}>Amount</th>
+            {!isShortTable && (
+              <th className={styles.transactionsTh}>Transaction details</th>
+            )}
             <th className={styles.transactionsTh}></th>
           </tr>
         </thead>
@@ -28,8 +30,14 @@ function TransactionsTable(props) {
           {transactions.map((transaction) => {
             const isIncome = transaction.type === "income";
             const updAmount = isIncome
-              ? `+$${transaction.amount}`
-              : `-$${transaction.amount}`;
+              ? `+$${transaction.amount.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}`
+              : `-$${transaction.amount.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}`;
 
             const displayTitle =
               transaction.type === "income"
@@ -39,13 +47,26 @@ function TransactionsTable(props) {
             return (
               <tr className={styles.transactionsTr}>
                 <td className={styles.transactionsTd}>
-                  <AvatarTransaction title={displayTitle} icons={icons} />
-                  <p className={styles.title}>{displayTitle}</p>
+                  <AvatarTransaction
+                    title={
+                      transaction.type === "transfer"
+                        ? transaction.to
+                        : displayTitle
+                    }
+                    icons={icons}
+                  />
+                  <p className={styles.title}>
+                    {transaction.type === "transfer"
+                      ? transaction.to
+                      : displayTitle}
+                  </p>
                 </td>
                 <td className={styles.transactionsTd}>
                   <p className={styles.account}>
-                    {transaction.account.charAt(0).toUpperCase() +
-                      transaction.account.slice(1)}
+                    {transaction.type === "transfer"
+                      ? transaction.from
+                      : transaction.account.charAt(0).toUpperCase() +
+                        transaction.account.slice(1)}
                   </p>
                 </td>
                 <td className={styles.transactionsTd}>
@@ -56,8 +77,16 @@ function TransactionsTable(props) {
                     {updAmount}
                   </p>
                 </td>
-                <td className={styles.transactionsTd}>
-                  <img src="/assets/icons/transactionSetting.svg" alt="Icon" />
+                {!isShortTable && (
+                  <td className={styles.transactionsTd}>
+                    <p className={styles.date}>{transaction.description}</p>
+                  </td>
+                )}
+                <td
+                  className={`${styles.transactionsTd} ${styles.deleteTransaction}`}
+                  onClick={() => onDeleteTransaction(transaction.id)}
+                >
+                  <img src="/assets/icons/delete.svg" alt="Icon" />
                 </td>
               </tr>
             );

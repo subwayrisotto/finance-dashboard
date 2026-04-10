@@ -5,7 +5,7 @@ function AvatarTransaction(props) {
   const { title, icons } = props;
 
   const iconObj = icons.find(
-    (icon) => icon.title?.toLowerCase() === title.toLowerCase(),
+    (icon) => icon.title.toLowerCase() === title.toLowerCase(),
   );
 
   const getInitials = (name) => {

@@ -45,7 +45,6 @@
 
 .transactionsTbody tr {
   transition: 0.25s ease;
-  cursor: pointer;
   &:last-child td {
     border-bottom: none;
   }
@@ -77,4 +76,20 @@
 .account,
 .date {
   color: #516778;
+}
+
+.deleteTransaction {
+  width: 24px;
+  height: 24px;
+  aspect-ratio: 1/1;
+  img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: 0.25s ease;
+
+    &:hover {
+      transform: rotate(45deg);
+    }
+  }
 }

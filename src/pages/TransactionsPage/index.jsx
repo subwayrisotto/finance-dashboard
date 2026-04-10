@@ -1,8 +1,18 @@
 import React from "react";
-import NavBar from "../../components/NavBarComponent/NavBarComponent";
+import TransactionsTable from "../../components/TransactionsTableComponent/TransactionsTableComponent";
 
-function Transactions() {
-  return <div className="pageContent">This is transaction page</div>;
+function Transactions(props) {
+  const { transactions, onDeleteTransaction } = props;
+  return (
+    <div className="pageContent">
+      {" "}
+      <TransactionsTable
+        transactions={transactions}
+        onDeleteTransaction={onDeleteTransaction}
+        isShortTable={false}
+      />
+    </div>
+  );
 }
 
 export default Transactions;

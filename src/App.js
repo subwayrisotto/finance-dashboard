@@ -4,17 +4,49 @@ import Overview from "./pages/OverviewPage";
 import Transactions from "./pages/TransactionsPage";
 import EmptyPage from "./pages/EmptyPage";
 import "./App.css";
+import fakeTransactions from "./data/transactions";
+import { useState } from "react";
 
 function App() {
+  const [transactions, setTransactions] = useState(fakeTransactions);
+
+  const handleSortTransactionsByDate = (arr) => {
+    const sortedArr = [...arr]
+      .filter((transaction) => transaction.type !== "transfer")
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+  };
+
+  const handleAddTransaction = (transaction) => {
+    setTransactions((prev) => [...prev, transaction]);
+  };
+
+  const handleDeleteTransaction = (id) => {
+    setTransactions((prev) => prev.filter((t) => t.id !== id));
+  };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="overview" />} />
-          <Route path="overview" element={<Overview />} />
+          <Route
+            path="overview"
+            element={
+              <Overview
+                transactions={transactions}
+                onAddTransaction={handleAddTransaction}
+                onDeleteTransaction={handleDeleteTransaction}
+              />
+            }
+          />
           <Route
             path="transactions"
-            element={<EmptyPage title="Transactions" />}
+            element={
+              <Transactions
+                transactions={transactions}
+                onDeleteTransaction={handleDeleteTransaction}
+              />
+            }
           />
           <Route path="analytics" element={<EmptyPage title="Analytics" />} />
           <Route path="accounts" element={<EmptyPage title="Accounts" />} />

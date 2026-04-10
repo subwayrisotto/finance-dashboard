@@ -26,7 +26,13 @@ function Modal(props) {
           />
         );
       case "transfer":
-        return <TransferForm selectedBox={selectedBox} />;
+        return (
+          <TransferForm
+            selectedBox={selectedBox}
+            onAddTransaction={onAddTransaction}
+            onClose={onClose}
+          />
+        );
       default:
         return "Test";
     }

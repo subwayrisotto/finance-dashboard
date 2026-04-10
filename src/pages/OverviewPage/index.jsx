@@ -6,14 +6,13 @@ import CashContainer from "../../components/CashContainerComponent/CashContainer
 import CashOperationContainer from "../../components/CashOperationContainerComponent/CashOperationContainerComponent";
 import Modal from "../../components/ModalComponent/ModalComponent";
 import ExpensesChart from "../../components/ExpensesChartComponent/ExpensesChartComponent";
-import fakeTransactions from "../../data/transactions";
 import TransactionsTable from "../../components/TransactionsTableComponent/TransactionsTableComponent";
 
-function Overview() {
+function Overview(props) {
+  const { transactions, onAddTransaction, onDeleteTransaction } = props;
   const [activeId, setActiveId] = useState(
     dataBy.find((item) => item.isActive)?.id || 1,
   );
-  const [transactions, setTransactions] = useState(fakeTransactions);
   const [selectedBox, setSelectedBox] = useState(null);
 
   const incomeTransactions = transactions.filter((t) => t.type === "income");
@@ -25,17 +24,12 @@ function Overview() {
     0,
   );
   const balance = totalIncome - totalExpenses;
-
   const sortedTransactions = [...transactions]
     .filter((transaction) => transaction.type !== "transfer")
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const handleOpenModal = (type) => {
     setSelectedBox(type);
-  };
-
-  const handleAddTransaction = (transaction) => {
-    setTransactions((prev) => [...prev, transaction]);
   };
 
   useEffect(() => {
@@ -115,7 +109,7 @@ function Overview() {
           <Modal
             onClose={() => setSelectedBox(null)}
             selectedBox={selectedBox}
-            onAddTransaction={handleAddTransaction}
+            onAddTransaction={onAddTransaction}
           />
         )}
 
@@ -125,7 +119,10 @@ function Overview() {
             <ExpensesChart transactions={expensesTransactions} />
           </div>
           <div className={styles.transactionTable}>
-            <TransactionsTable transactions={sortedTransactions} />
+            <TransactionsTable
+              transactions={sortedTransactions}
+              onDeleteTransaction={onDeleteTransaction}
+            />
           </div>
         </div>
       </div>
