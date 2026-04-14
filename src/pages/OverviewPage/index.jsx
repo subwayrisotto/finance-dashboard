@@ -7,16 +7,20 @@ import CashOperationContainer from "../../components/CashOperationContainerCompo
 import Modal from "../../components/ModalComponent/ModalComponent";
 import ExpensesChart from "../../components/ExpensesChartComponent/ExpensesChartComponent";
 import TransactionsTable from "../../components/TransactionsTableComponent/TransactionsTableComponent";
+import { BarLoader } from "react-spinners";
 
 function Overview(props) {
-  const { transactions, onAddTransaction, onDeleteTransaction } = props;
+  const { transactions, onAddTransaction, onDeleteTransaction, isLoading } =
+    props;
   const [activeId, setActiveId] = useState(
     dataBy.find((item) => item.isActive)?.id || 1,
   );
   const [selectedBox, setSelectedBox] = useState(null);
 
-  const incomeTransactions = transactions.filter((t) => t.type === "income");
-  const expensesTransactions = transactions.filter((t) => t.type === "expense");
+  const incomeTransactions = transactions?.filter((t) => t.type === "income");
+  const expensesTransactions = transactions?.filter(
+    (t) => t.type === "expense",
+  );
 
   const totalIncome = incomeTransactions.reduce((sum, t) => sum + t.amount, 0);
   const totalExpenses = expensesTransactions.reduce(
@@ -114,16 +118,24 @@ function Overview(props) {
         )}
 
         <div className={styles.detailedTransactionInfo}>
-          {" "}
-          <div className={styles.expensesChartCtn}>
-            <ExpensesChart transactions={expensesTransactions} />
-          </div>
-          <div className={styles.transactionTable}>
-            <TransactionsTable
-              transactions={sortedTransactions}
-              onDeleteTransaction={onDeleteTransaction}
-            />
-          </div>
+          {isLoading ? (
+            <BarLoader color="#155eef" loading={isLoading} />
+          ) : (
+            <div className={styles.expensesChartCtn}>
+              <ExpensesChart transactions={expensesTransactions} />
+            </div>
+          )}
+
+          {isLoading ? (
+            <BarLoader color="#155eef" loading={isLoading} />
+          ) : (
+            <div className={styles.transactionTable}>
+              <TransactionsTable
+                transactions={sortedTransactions}
+                onDeleteTransaction={onDeleteTransaction}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import incomeSources from "../../data/incomeSources";
 import styles from "./Form.module.scss";
 import accounts from "../../data/accounts";
+import { postNewTransaction } from "../../api";
 
 function IncomeForm(props) {
   const { selectedBox, onAddTransaction, onClose } = props;
@@ -13,23 +14,26 @@ function IncomeForm(props) {
     description: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.amount || !formData.source) return;
+
     const newTransaction = {
-      id: crypto.randomUUID(),
       type: selectedBox,
       amount: formData.amount,
       source: formData.source,
       account: formData.account,
       date: formData.date,
       description: formData.description,
-      createdAt: new Date().toISOString(),
     };
 
-    if (!formData.amount || !formData.source) return;
+    const savedTransaction = await postNewTransaction(newTransaction);
 
-    onAddTransaction(newTransaction);
+    if (savedTransaction) {
+      onAddTransaction(savedTransaction);
+    }
+
     onClose();
   };
 

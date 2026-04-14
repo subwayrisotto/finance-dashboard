@@ -6,11 +6,13 @@ function Transactions(props) {
   return (
     <div className="pageContent">
       {" "}
-      <TransactionsTable
-        transactions={transactions}
-        onDeleteTransaction={onDeleteTransaction}
-        isShortTable={false}
-      />
+      <div className="wrapper">
+        <TransactionsTable
+          transactions={transactions}
+          onDeleteTransaction={onDeleteTransaction}
+          isShortTable={false}
+        />
+      </div>
     </div>
   );
 }

@@ -4,24 +4,43 @@ import Overview from "./pages/OverviewPage";
 import Transactions from "./pages/TransactionsPage";
 import EmptyPage from "./pages/EmptyPage";
 import "./App.css";
-import fakeTransactions from "./data/transactions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { deleteTransaction, getAllTransactions } from "./api";
 
 function App() {
-  const [transactions, setTransactions] = useState(fakeTransactions);
+  const [transactions, setTransactions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSortTransactionsByDate = (arr) => {
-    const sortedArr = [...arr]
-      .filter((transaction) => transaction.type !== "transfer")
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
-  };
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        setIsLoading(true);
+
+        const data = await getAllTransactions();
+
+        setTransactions(data);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  // const handleSortTransactionsByDate = (arr) => {
+  //   const sortedArr = [...arr]
+  //     .filter((transaction) => transaction.type !== "transfer")
+  //     .sort((a, b) => new Date(b.date) - new Date(a.date));
+  // };
 
   const handleAddTransaction = (transaction) => {
     setTransactions((prev) => [...prev, transaction]);
   };
 
-  const handleDeleteTransaction = (id) => {
-    setTransactions((prev) => prev.filter((t) => t.id !== id));
+  const handleDeleteTransaction = async (id) => {
+    const updTransactions = await deleteTransaction(id);
+    setTransactions(updTransactions);
   };
 
   return (
@@ -36,6 +55,7 @@ function App() {
                 transactions={transactions}
                 onAddTransaction={handleAddTransaction}
                 onDeleteTransaction={handleDeleteTransaction}
+                isLoading={isLoading}
               />
             }
           />

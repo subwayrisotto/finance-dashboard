@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Form.module.scss";
 import expenseSources from "../../data/expenseSources";
 import accounts from "../../data/accounts";
+import { postNewTransaction } from "../../api";
 
 function ExpenseForm(props) {
   const { selectedBox, onAddTransaction, onClose } = props;
@@ -14,24 +15,27 @@ function ExpenseForm(props) {
     description: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.amount || !formData.title) return;
+
     const newTransaction = {
-      id: crypto.randomUUID(),
       type: selectedBox,
-      amount: formData.amount,
+      amount: Number(formData.amount),
       title: formData.title,
       account: formData.account,
       date: formData.date,
       category: formData.category,
       description: formData.description,
-      createdAt: new Date().toISOString(),
     };
 
-    if (!formData.amount || !formData.title) return;
+    const savedTransaction = await postNewTransaction(newTransaction);
 
-    onAddTransaction(newTransaction);
+    if (savedTransaction) {
+      onAddTransaction(savedTransaction);
+    }
+
     onClose();
   };
 
